@@ -4,6 +4,8 @@
  */
 package pos.lyd;
 
+import pos.lyd.view.LayoutView;
+
 /**
  *
  * @author PrasadiKengalle
@@ -14,7 +16,7 @@ public class PosLyd {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello");
+        new LayoutView().setVisible(true);
     }
     
 }
