@@ -6,13 +6,15 @@ package pos.lyd.dao;
 
 import pos.lyd.dao.custom.impl.CustomerDaoImpl;
 import pos.lyd.dao.custom.impl.ItemDaoImpl;
+import pos.lyd.dao.custom.impl.OrderDaoImpl;
+import pos.lyd.dao.custom.impl.OrderDetailDaoImpl;
 
 /**
  *
  * @author PrasadiKengalle
  */
 public class DaoFactory {
-    
+
     private static DaoFactory daoFactory;
 
     private DaoFactory() {
@@ -32,14 +34,17 @@ public class DaoFactory {
                 return new CustomerDaoImpl();
             case ITEM:
                 return new ItemDaoImpl();
-
+            case ORDER:
+                return new OrderDaoImpl();
+            case ORDER_DETAIL:
+                return new OrderDetailDaoImpl();
             default:
                 throw new AssertionError();
         }
     }
 
     public enum DaoTypes {
-        CUSTOMER, ITEM
+        CUSTOMER, ITEM, ORDER, ORDER_DETAIL
     }
-    
+
 }
