@@ -4,6 +4,7 @@
  */
 package pos.lyd.service.custom;
 
+import java.util.ArrayList;
 import pos.lyd.dto.CustomerDto;
 import pos.lyd.service.SuperService;
 
@@ -12,5 +13,14 @@ import pos.lyd.service.SuperService;
  * @author PrasadiKengalle
  */
 public interface CustomerService extends SuperService {
-    String addCustomer(CustomerDto customerDto) throws Exception;
+   
+     String addCustomer(CustomerDto customerDto) throws Exception;
+
+    String updateCustomer(CustomerDto customerDto) throws Exception;
+
+    String deleteCustomer(String id) throws Exception;
+
+    CustomerDto getCustomer(String id) throws Exception;
+
+    ArrayList<CustomerDto> getAllCustomer() throws Exception;
 }

@@ -4,9 +4,11 @@
  */
 package pos.lyd.view;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import pos.lyd.controller.CustomerController;
 import pos.lyd.dto.CustomerDto;
 
@@ -24,6 +26,7 @@ public class CustomerPanel extends javax.swing.JPanel {
     public CustomerPanel() {
         customerController = new CustomerController();
         initComponents();
+        loadAllCustomers();
     }
 
     /**
@@ -386,7 +389,7 @@ public class CustomerPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void addCustomer() {
-        
+
         try {
             CustomerDto customerDto = new CustomerDto(custIdText.getText(),
                     custTitleText.getText(),
@@ -406,9 +409,9 @@ public class CustomerPanel extends javax.swing.JPanel {
             Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-        } 
-    
-     private void clear() {
+    }
+
+    private void clear() {
         custIdText.setText("");
         custTitleText.setText("");
         custNameText.setText("");
@@ -419,10 +422,30 @@ public class CustomerPanel extends javax.swing.JPanel {
         custProvinceText.setText("");
         custZipText.setText("");
     }
+
+    private void loadAllCustomers() {
+        try {
+            String[] columns = {"ID", "Name", "Address", "Salary", "Postal Code"};
+
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+
+            customerTable.setModel(dtm);
+
+            ArrayList<CustomerDto> customers = customerController.getAllCustomers();
+
+            for (CustomerDto customer : customers) {
+                Object[] rowData = {customer.getId(), customer.getTitle() + " " + customer.getName(), customer.getAddress() + ", " + customer.getCity(), customer.getSalary(), customer.getZip()};
+                dtm.addRow(rowData);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
-    
-   
-
-
-
-
+}
