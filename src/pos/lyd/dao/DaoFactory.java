@@ -5,6 +5,7 @@
 package pos.lyd.dao;
 
 import pos.lyd.dao.custom.impl.CustomerDaoImpl;
+import pos.lyd.dao.custom.impl.ItemDaoImpl;
 
 /**
  *
@@ -29,6 +30,8 @@ public class DaoFactory {
         switch (type) {
             case CUSTOMER:
                 return new CustomerDaoImpl();
+            case ITEM:
+                return new ItemDaoImpl();
 
             default:
                 throw new AssertionError();
@@ -36,7 +39,7 @@ public class DaoFactory {
     }
 
     public enum DaoTypes {
-        CUSTOMER
+        CUSTOMER, ITEM
     }
     
 }

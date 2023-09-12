@@ -31,6 +31,7 @@ public class LayoutView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         sideNavPanel = new javax.swing.JPanel();
         manageCustomerButton = new javax.swing.JButton();
+        manageItemButton = new javax.swing.JButton();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,13 +69,23 @@ public class LayoutView extends javax.swing.JFrame {
             }
         });
 
+        manageItemButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        manageItemButton.setText("Manage Item");
+        manageItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageItemButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sideNavPanelLayout = new javax.swing.GroupLayout(sideNavPanel);
         sideNavPanel.setLayout(sideNavPanelLayout);
         sideNavPanelLayout.setHorizontalGroup(
             sideNavPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sideNavPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(manageCustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                .addGroup(sideNavPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageCustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(manageItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sideNavPanelLayout.setVerticalGroup(
@@ -82,7 +93,9 @@ public class LayoutView extends javax.swing.JFrame {
             .addGroup(sideNavPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(manageCustomerButton)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(manageItemButton)
+                .addContainerGap(410, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -135,10 +148,13 @@ public class LayoutView extends javax.swing.JFrame {
         loadCustomerPanel();
     }//GEN-LAST:event_manageCustomerButtonActionPerformed
 
+    private void manageItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageItemButtonActionPerformed
+        loadItemPanel();
+    }//GEN-LAST:event_manageItemButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel basePanel;
@@ -146,15 +162,26 @@ public class LayoutView extends javax.swing.JFrame {
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageCustomerButton;
+    private javax.swing.JButton manageItemButton;
     private javax.swing.JPanel sideNavPanel;
     // End of variables declaration//GEN-END:variables
 
     private void loadCustomerPanel() {
-       bodyPanel.removeAll();
+        bodyPanel.removeAll();
         CustomerPanel customerPanel = new CustomerPanel();
 
         customerPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
         bodyPanel.add(customerPanel);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
+    private void loadItemPanel() {
+        bodyPanel.removeAll();
+        ItemPanel itemPanel = new ItemPanel();
+
+        itemPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(itemPanel);
         bodyPanel.repaint();
         bodyPanel.revalidate();
     }
